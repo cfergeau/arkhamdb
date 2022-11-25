@@ -17,14 +17,14 @@ parameters:
     cache_expiration:  600
     
     # Email sender
-    email_sender_address: ~
-    email_sender_name: ~
+    email_sender_address: arkhamdb@example.com
+    email_sender_name: ArkhamDB Sample User
     
     # Branding
-    website_name: ~
-    website_url: ~
-    game_name: ~
-    publisher_name: ~ 
+    website_name: ArkhamDB Sample App
+    website_url: https://arkhamdb.example.com
+    game_name: Arkham Horror LCG
+    publisher_name: Fantasy Flight Games
     
     # Analytics & AdSense
     google_analytics_tracking_code: UA-00000000-1
