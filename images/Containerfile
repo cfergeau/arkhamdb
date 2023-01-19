@@ -1,0 +1,32 @@
+FROM registry.access.redhat.com/ubi8
+COPY images/symfony-stable-el8.repo /etc/yum.repos.d/
+RUN yum -y install git-core php php-cli php-json php-mysqlnd php-pdo php-xml php-zip symfony-cli
+RUN git clone https://github.com/Kamalisk/arkhamdb
+RUN rm web/index.html
+COPY app/config/parameters.yml.dist arkhamdb/app/config/parameters.yml.dist
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && php composer-setup.php --install-dir=/usr/local/bin --filename=composer --1 && rm -f composer-setup.php
+# set 'memory_limit = -1' in /etc/php.ini
+# or maybe COMPOSER_MEMORY_LIMIT=-1 composer.phar <...>
+RUN cd arkhamdb && COMPOSER_MEMORY_LIMIT=-1 composer update -n && composer install
+# Creating the "app/config/parameters.yml" file
+# Use pdo_sqlite instead of mysql?
+# See Doctrine Configuration in app/config/config.yml
+# May need mkdir /arkhamdb/app/data
+#
+# mysql
+# debian container
+# apt-get install mariadb-server
+# /etc/init.d/mariadb start
+# /usr/bin/mysql -e "GRANT ALL ON *.* TO 'mysql'@'%' IDENTIFIED BY 'example' WITH GRANT OPTION"
+#RUN git clone https://github.com/Kamalisk/arkhamdb-json-data
+#RUN php bin/console --no-interaction doctrine:database:create
+# unneeded? errors out
+# RUN php bin/console doctrine:schema:create
+#RUN php bin/console app:import:std /arkhamdb-json-data/
+#   SQLSTATE[HY000]: General error: 1 no such table: cycle
+#not working even if README says so: RUN php bin/console server:run
+#RUN symfony server:start
+
+
+
+

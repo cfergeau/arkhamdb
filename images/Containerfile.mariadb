@@ -1,0 +1,12 @@
+FROM docker.io/library/mariadb
+#FROM quay.io/centos/centos:stream8
+#RUN dnf install -y mariadb
+#MARIADB_ROOT_PASSWORD
+#MARIADB_ROOT_HOST
+
+#MARIADB_MYSQL_LOCALHOST_USER #mysql@localhost # MARIADB_MYSQL_LOCALHOST_GRANTS
+# MARIADB_USER MARIADB_PASSWORD
+#MARIADB_DATABASE=symfony
+
+#MARIADB_ROOT_PASSWORD_FILE=/run/secrets/mysql-root
+#-v /my/own/datadir:/var/lib/mysqlp

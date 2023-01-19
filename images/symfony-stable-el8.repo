@@ -1,0 +1,46 @@
+# Source: Symfony
+# Site: https://github.com/symfony-cli/symfony-cli
+# Repository: Symfony / Symfony CLI
+# Description: The Symfony CLI tool
+
+[symfony-stable]
+name=symfony-stable
+baseurl=https://dl.cloudsmith.io/public/symfony/stable/rpm/el/8/$basearch
+repo_gpgcheck=1
+enabled=1
+gpgkey=https://dl.cloudsmith.io/public/symfony/stable/gpg.99CEF8A62216B73D.key
+gpgcheck=1
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+pkg_gpgcheck=1
+autorefresh=1
+type=rpm-md
+
+[symfony-stable-noarch]
+name=symfony-stable-noarch
+baseurl=https://dl.cloudsmith.io/public/symfony/stable/rpm/el/8/noarch
+repo_gpgcheck=1
+enabled=1
+gpgkey=https://dl.cloudsmith.io/public/symfony/stable/gpg.99CEF8A62216B73D.key
+gpgcheck=1
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+pkg_gpgcheck=1
+autorefresh=1
+type=rpm-md
+
+[symfony-stable-source]
+name=symfony-stable-source
+baseurl=https://dl.cloudsmith.io/public/symfony/stable/rpm/el/8/SRPMS
+repo_gpgcheck=1
+enabled=1
+gpgkey=https://dl.cloudsmith.io/public/symfony/stable/gpg.99CEF8A62216B73D.key
+gpgcheck=1
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+pkg_gpgcheck=1
+autorefresh=1
+type=rpm-md
