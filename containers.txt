@@ -1,0 +1,46 @@
+Move your somehow legacy PHP app to the cloud!
+
+start with arkhamdb
+start writing Containerfile
+try to install php/composer in ubi8 -> fail
+try to install php/composer in debian -> fail
+find https://github.com/Kamalisk/arkhamdb/issues/522 and https://github.com/Kamalisk/arkhamdb/pull/526/files
+use composer1
+-> need database 
+https://www.matthewparris.org/using-php-and-mysql-with-docker/
+
+-> use pods to share the database connection
+podman run  --rm -dt  --pod new:myapp  -p 8000:8000 mysql
+podman run -dt  --rm --pod myapp  php
+
+https://www.opensourcerers.org/2021/02/01/how-to-go-from-docker-to-kubernetes-the-right-way/
+https://developers.redhat.com/blog/2017/08/02/getting-started-with-kompose
+https://www.redhat.com/sysadmin/compose-podman-pods
+
+a temp image can be used to run composer instead of installing it
+https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose
+
+Managing Configuration
+https://www.howtogeek.com/devops/how-to-containerize-a-legacy-application/
+
+
+
+Need to figure out what to do in podman build, what to do in a script, how to provide connection parameters to the container, ...
+composer update needs connection/email/... parameters -> need to make sure it can be given "generic parameters", which we can then update
+added an 'init' image to create the sql data
+
+podman run --rm -e MARIADB_RANDOM_ROOT_PASSWORD=1 -e MARIADB_DATABASE=symfony -e MARIADB_USER=arkhamdb -e  MARIADB_PASSWORD=secret-arkhamdb-password -p 8000:8000 --pod new:arkhamdb  docker.io/library/mariadb
+
+installed symfony-cli and created symfony user, then `symfony server:start` -> listening on localhost:8080
+-> down for maintainance, but something related to our code happened! 
+-> index.html refers to this, try to poke at app.php/app_dev.php, forbidden, but hints to look at the files
+-> some auth checks, remove them!
+-> Unable to create the storage directory (/arkhamdb/var/cache/dev/profiler).
+   at FileProfilerStorage->__construct('file:/arkhamdb/var/cache/dev/profiler')
+-> same for /arkhamdb/var/log
+-> chown -R symfony val
+
+-> tried to remove the index.html file following advice from https://github.com/Kamalisk/arkhamdb/issues/202
+-> moves forward, but use a fake URL!
+-> website_url: 127.0.0.1" in app/config/parameters.yml
+
