@@ -44,3 +44,7 @@ installed symfony-cli and created symfony user, then `symfony server:start` -> l
 -> moves forward, but use a fake URL!
 -> website_url: 127.0.0.1" in app/config/parameters.yml
 
+
+containers to openshift:
+https://github.com/slemeur/podman-desktop-demo
+https://github.com/slemeur/podman-desktop-demo/tree/main/primary-podify-demo
